@@ -13,6 +13,7 @@ private:
 	std::shared_ptr<olc::Sprite> icon;
 public:
 	Item(std::string name,std::shared_ptr<olc::Sprite> icon) : name(name), icon(icon){}
+	const std::string& getName() {return name;}
 };
 
 class ItemStack {
@@ -23,15 +24,22 @@ private:
 
 class AllItems {//singleton
 private:
-	AllItems() : blue("blue", std::make_shared<olc::Sprite>("blue.png")),
-				 green("green", std::make_shared<olc::Sprite>("green.png")),
-				 cyan("cyan", std::make_shared<olc::Sprite>("cyan.png")){}
+	AllItems() : blue(std::make_shared<Item>("blue", std::make_shared<olc::Sprite>("blue.png"))),
+				 green(std::make_shared<Item>("green", std::make_shared<olc::Sprite>("green.png"))),
+				 cyan(std::make_shared<Item>("cyan", std::make_shared<olc::Sprite>("cyan.png"))) {}
+	static AllItems* aItems;
 public:
-	static AllItems aItems;
+	static AllItems* getAllItems(){
+		if (aItems == nullptr) {
+			aItems = new AllItems();
+		}
+		return aItems;
+	};
 	AllItems(const AllItems& i) = delete;//no copy constructor
-	Item blue;
-	Item green;
-	Item cyan;
+	~AllItems(){delete aItems;}
+	std::shared_ptr<Item> blue;
+	std::shared_ptr<Item> green;
+	std::shared_ptr<Item> cyan;
 };
 
 class ItemInput {

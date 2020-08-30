@@ -1,3 +1,3 @@
 #include "structure.h"
 
-AllItems AllItems::aItems;
+AllItems* AllItems::aItems = nullptr;

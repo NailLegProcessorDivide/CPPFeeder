@@ -5,6 +5,7 @@
 #include "olcPixelGameEngine.h"
 #include "structure.h"
 
+
 class CPPFeeder : public olc::PixelGameEngine {
 private:
 	double scale;
@@ -21,6 +22,8 @@ public:
 public:
 	bool OnUserCreate() override
 	{
+		AllItems* ai = AllItems::getAllItems();
+		printf("name blue: %s\n", ai->blue->getName().c_str());
 		return true;
 	}
 
