@@ -32,7 +32,7 @@ public:
 	Item blue;
 	Item green;
 	Item cyan;
-}
+};
 
 class ItemInput {
 private:
